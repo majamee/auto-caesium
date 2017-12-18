@@ -2,7 +2,7 @@
 mkdir -p "/tmp/video/";
 shopt -s nullglob;
 
-echo "Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
+echo -e "\e[7mPlease be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
 echo -e "\n\e[5mProcessing ${1}\n";
 cd /video/$1;
 for file in *
