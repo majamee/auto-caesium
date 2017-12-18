@@ -74,7 +74,7 @@ do
             fi
 
             echo "${file}" >> /video/.hero-videoptim;
-            echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}";
+            echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
         fi
     fi
 done
