@@ -67,15 +67,15 @@ do
                     chmod `stat -c "%a" "${file}"` "/tmp/video/${file}";
                     mv "${file}" "${file}.backup";
                     mv "/tmp/video/${file}" "${file}";
+                    echo "${file}" >> /video/.hero-videoptim;
+                    echo -e "${On_Green}Optimized file ${Bold}${file}${Bold_Off} successfully as hero-video${Color_Off}\n";
                 else
+                    echo "${file}" >> /video/.hero-videoptim;
                     echo -e "${On_Red}Optimized file for ${file} is not smaller. Skipping${Color_Off}";
                 fi
             else
                 echo -e "${On_Light_Red}Optimizing file ${file} failed. Skipping${Color_Off}";
             fi
-
-            echo "${file}" >> /video/.hero-videoptim;
-            echo -e "${On_Green}Optimized file ${Bold}${file}${Bold_Off} successfully as hero-video${Color_Off}\n";
         fi
     fi
 done
