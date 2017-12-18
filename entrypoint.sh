@@ -42,7 +42,7 @@ mkdir -p "/tmp/video/";
 shopt -s nullglob;
 
 echo -e "${Reverse}Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
-echo -e "${Reverse_Off}\n${Blinking}Processing ${1}\n";
+echo -e "${Reverse_Off}\n${Blinking}Processing ${1}${Blinking_Off}\n";
 cd /video/$1;
 for file in *
 do
