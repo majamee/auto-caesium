@@ -4,41 +4,41 @@
 # Switch
 SWITCH="\e["
 # Reset
-Color_Off='${SWITCH}0m'         # Text Reset
+Color_Off='\e[0m'         # Text Reset
 
 # Regular Colors
-Black='${SWITCH}0;30m'          # Black
-Red='${SWITCH}0;31m'            # Red
-Green='${SWITCH}0;32m'          # Green
-Yellow='${SWITCH}0;33m'         # Yellow
-Blue='${SWITCH}0;34m'           # Blue
-Purple='${SWITCH}0;35m'         # Purple
-Cyan='${SWITCH}0;36m'           # Cyan
-White='${SWITCH}0;37m'          # White
+Black='\e[0;30m'          # Black
+Red='\e[0;31m'            # Red
+Green='\e[0;32m'          # Green
+Yellow='\e[0;33m'         # Yellow
+Blue='\e[0;34m'           # Blue
+Purple='\e[0;35m'         # Purple
+Cyan='\e[0;36m'           # Cyan
+White='\e[0;37m'          # White
 
 # Bold
-Bold='${SWITCH}1'               # Bold on
-Bold_Off='${SWITCH}21'          # Bold off
+Bold='\e[1'               # Bold on
+Bold_Off='\e[21'          # Bold off
 
 # Underline
-Underline='${SWITCH}4'          # Underline on
-Underline_Off='${SWITCH}24'     # Underline off
+Underline='\e[4'          # Underline on
+Underline_Off='\e[24'     # Underline off
 
 # Blinking
-Blinking='${SWITCH}5m'          # Blinking on
-Blinking_Off='${SWITCH}25m'     # Blinking off
+Blinking='\e[5m'          # Blinking on
+Blinking_Off='\e[25m'     # Blinking off
 
 # Reverse
-Reverse='${SWITCH}7m'           # Reverse on
-Reverse_Off='${SWITCH}27m'      # Reverse off
+Reverse='\e[7m'           # Reverse on
+Reverse_Off='\e[27m'      # Reverse off
 
 # Background
-On_Black='${SWITCH}40m'         # Black
-On_Red='${SWITCH}41m'           # Red
-On_Green='${SWITCH}42m'         # Green
-On_Yellow='${SWITCH}43m'        # Yellow
-On_Light_Red='${SWITCH}101m'    # Light Red
-On_Light_Blue='${SWITCH}104m'   # Light Blue
+On_Black='\e[40m'         # Black
+On_Red='\e[41m'           # Red
+On_Green='\e[42m'         # Green
+On_Yellow='\e[43m'        # Yellow
+On_Light_Red='\e[101m'    # Light Red
+On_Light_Blue='\e[104m'   # Light Blue
 
 mkdir -p "/tmp/video/";
 shopt -s nullglob;
