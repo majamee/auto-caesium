@@ -57,6 +57,7 @@ do
             fi
 
             rm -rf "/tmp/video/*";
+            echo -e "${On_Yellow}${Bold}${file}${Bold_Off} being optimized now! Please be patient.${Color_Off}";
             ffmpeg -v quiet -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -preset veryslow -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${file}";
             if [ ${PIPESTATUS[0]} -eq 0 ]; then
                 oldsize=$(wc -c <"${file}");
@@ -74,7 +75,7 @@ do
             fi
 
             echo "${file}" >> /video/.hero-videoptim;
-            echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
+            echo -e "${On_Green}Optimized file ${Bold}${file}${Bold_Off} successfully as hero-video${Color_Off}\n";
         fi
     fi
 done
