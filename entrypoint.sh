@@ -42,7 +42,7 @@ mkdir -p "/tmp/video/";
 shopt -s nullglob;
 
 echo -e "${Reverse}Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
-echo -e "${Reverse_Off}\n${Blinking}Processing ${1}${Blinking_Off}\n";
+echo -e "${Reverse_Off}${Green}${Bold}\nStarting processing ${1}${Bold_Off}${Color_Off}\n";
 cd /video/$1;
 for file in *
 do
@@ -52,7 +52,7 @@ do
         if ( [ ${file: -4} == ".avi" ] || [ ${file: -4} == ".mkv" ] || [ ${file: -4} == ".mp4" ] || [ ${file: -4} == ".wmv" ] || [ ${file: -4} == ".ts" ] || [ ${file: -4} == ".mov" ] || [ ${file: -4} == ".flv" ] || [ ${file: -4} == ".webm" ] ); then
             if grep -Fxq "${file}" /video/.hero-videoptim
             then
-                echo -e "${Blinking_Off}${On_Light_Blue}${file} already optimized in previous run. Skipping${Color_Off}";
+                echo -e "${On_Light_Blue}${file} already optimized in previous run. Skipping${Color_Off}";
                 continue
             fi
 
@@ -67,14 +67,14 @@ do
                     mv "${file}" "${file}.backup";
                     mv "/tmp/video/${file}" "${file}";
                 else
-                    echo -e "${Blinking_Off}${On_Red}Optimized file for ${file} is not smaller. Skipping${Color_Off}";
+                    echo -e "${On_Red}Optimized file for ${file} is not smaller. Skipping${Color_Off}";
                 fi
             else
-                echo -e "${Blinking_Off}${On_Light_Red}Optimizing file ${file} failed. Skipping${Color_Off}";
+                echo -e "${On_Light_Red}Optimizing file ${file} failed. Skipping${Color_Off}";
             fi
 
             echo "${file}" >> /video/.hero-videoptim;
-            echo -e "${Blinking_Off}${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}";
+            echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}";
         fi
     fi
 done
