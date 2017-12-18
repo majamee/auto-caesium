@@ -1,5 +1,6 @@
 #!/bin/bash
-shopt -s nullglob
+mkdir -p "/tmp/video/";
+shopt -s nullglob;
 
 echo "Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
 echo "Processing ${1}";
@@ -19,8 +20,8 @@ do
             rm -rf "/tmp/video/*";
             ffmpeg -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${file}"; # optimize hero-video
             if [ ${PIPESTATUS[0]} -eq 0 ]; then
-                oldsize=$(wc -c <"${file}")
-                newsize=$(wc -c <"/tmp/video/${file}")
+                oldsize=$(wc -c <"${file}");
+                newsize=$(wc -c <"/tmp/video/${file}");
                 if [ $newsize -lt $oldsize ]; then
                     chown `stat -c "%u:%g" "${file}"` "/tmp/video/${file}";
                     chmod `stat -c "%a" "${file}"` "/tmp/video/${file}";
