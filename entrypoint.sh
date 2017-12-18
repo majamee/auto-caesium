@@ -15,12 +15,12 @@ Cyan='\e[0;36m'           # Cyan
 White='\e[0;37m'          # White
 
 # Bold
-Bold='\e[1'               # Bold on
-Bold_Off='\e[21'          # Bold off
+Bold='\e[1m'               # Bold on
+Bold_Off='\e[21m'          # Bold off
 
 # Underline
-Underline='\e[4'          # Underline on
-Underline_Off='\e[24'     # Underline off
+Underline='\e[4m'          # Underline on
+Underline_Off='\e[24m'     # Underline off
 
 # Blinking
 Blinking='\e[5m'          # Blinking on
