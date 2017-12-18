@@ -12,8 +12,8 @@ docker run -v /absolute/path/to/hero-videos-base-folder/:/video majamee/hero-vid
 ```
 Please just replace in the command above the absolute path to your video file folder and the full file name of your video file to be converted.
 
-`docker pull majamee/hero-videoptim` does update the instance image.  
-`docker run...` will mount the folder `/absolute/path/to/hero-videos-base-folder` into the docker image and convert all video-files within that folder replacing the original with optimized versions and leaving everything that cannot be optimized without errors as is. Backups of the original image will be kept next to the hero-video-files (which have the audio-track removed) to allow autoplay.
+* `docker pull majamee/hero-videoptim` does update the instance image.
+* `docker run...` will mount the folder `/absolute/path/to/hero-videos-base-folder` into the docker image and convert all video-files within that folder replacing the original with optimized versions and leaving everything that cannot be optimized without errors as is. Backups of the original image will be kept next to the hero-video-files (which have the audio-track removed) to allow autoplay.
 
 # Examplary toolchain usage
 Just use Kitematic to open the shared folder, place your video file in there, replace `"input.mkv"` in the commands below by your input video file (without `""`) and execute the shell commands subsequent into the Docker container.
@@ -23,5 +23,4 @@ ffmpeg -y -threads 4 -i "input.mkv" -an -c:v libx264 -x264opts 'keyint=24:min-ke
 ```
 
 ## Disclaimer / Warning
-
 The software used in this container is far from beeing stable. As this container does replace files inline make sure to keep a backup of all files at any time prior to using this as this can corrupt data and cause potential data loss on everything it is used on!
