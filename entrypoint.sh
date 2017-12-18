@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s nullglob
 
-echo "Please be aware, that the audio track of all videos in provided folder will be cut. Due to that originals will be kept renamed.";
+echo "Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
 echo "Processing ${1}";
 cd /hero-video/$1;
 for file in *
