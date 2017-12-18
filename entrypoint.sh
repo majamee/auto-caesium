@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Text formatting details @https://misc.flogisoft.com/bash/tip_colors_and_formatting
-# Switch
-SWITCH="\e["
 # Reset
 Color_Off='\e[0m'         # Text Reset
 
