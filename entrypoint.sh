@@ -6,7 +6,7 @@ cd /caesium/$1;
 for file in *
 do
     if [ -d "${file}" ] ; then
-        /caesiumbin/entrypoint.sh "${1}/${file}";
+        /bin/entrypoint.sh "${1}/${file}";
     else 
         if ( [ ${file: -4} == ".png" ] || [ ${file: -4} == ".jpg" ] ); then
             if grep -Fxq "${file}" /caesium/.caesiumoptimized
