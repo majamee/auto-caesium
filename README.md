@@ -10,7 +10,7 @@ Recommended usage via Docker [Kitematic](https://kitematic.com/) & [Docker Hub](
 docker pull majamee/hero-videoptim
 docker run -v /absolute/path/to/hero-videos-base-folder/:/video majamee/hero-videoptim
 ```
-Please just replace in the command above the absolute path to your video file folder and the full file name of your video file to be converted.
+Please just replace in the command above the absolute path to your root video file folder and all videos inside (recursive) will be converted to web-optimized hero-videos (no-audio).
 
 * `docker pull majamee/hero-videoptim` does update the instance image.
 * `docker run...` will mount the folder `/absolute/path/to/hero-videos-base-folder` into the docker image and convert all video-files within that folder replacing the original with optimized versions and leaving everything that cannot be optimized without errors as is. Backups of the original image will be kept next to the hero-video-files (which have the audio-track removed) to allow autoplay.
