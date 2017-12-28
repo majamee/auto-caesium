@@ -22,5 +22,8 @@ Just use Kitematic to open the shared folder, place your video file in there, re
 ffmpeg -y -threads 4 -i "input.mkv" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -crf 22 -movflags faststart -write_tmcd 0 "hero-optimized.mp4"
 ```
 
-## Disclaimer / Warning
-The software used in this container is far from beeing stable. As this container does replace files inline make sure to keep a backup of all files at any time prior to using this as this can corrupt data and cause potential data loss on everything it is used on!
+## Features
+* Optimizes all video files in a folder or in any of its subfolders for web playback
+* Prevents upscaling (maximum 1080p)
+* Removes audio track to save bandwidth and to make autoplay for hero videos in all modern web browsers possible
+* Optimized hero-video replaces the old file, which itself is being kept renamed as `*.backup`
