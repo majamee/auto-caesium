@@ -99,8 +99,8 @@ do
                         else
                             echo "${file}" >> /video/.hero-videoptim;
                             echo -e "${On_Red}Optimized file for ${file} is not smaller. Skipping${Color_Off}";
-                    fi
-                fi
+                        fi
+                    fi 
             else
                 echo -e "${On_Light_Red}Optimizing file ${file} failed. Skipping${Color_Off}";
             fi
