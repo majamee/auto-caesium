@@ -55,9 +55,14 @@ do
                 echo -e "${On_Light_Blue}${file} already optimized in previous run. Skipping${Color_Off}";
                 continue
             fi
-
+            
+            # Cleanup
             rm -rf "/tmp/video/*";
             echo -e "${On_Yellow}${Bold}${file} ${Bold_Off}being optimized now! Please be patient.${Color_Off}";
+            filename=$(basename "${file}");
+            filename="${filename%.*}";
+            frames=$(ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 "${file}")
+            # Start transcoding
             ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -preset veryslow -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${file}";
             if [ ${PIPESTATUS[0]} -eq 0 ]; then
                 oldsize=$(wc -c <"${file}");
@@ -70,8 +75,31 @@ do
                     echo "${file}" >> /video/.hero-videoptim;
                     echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                 else
-                    echo "${file}" >> /video/.hero-videoptim;
-                    echo -e "${On_Red}Optimized file for ${file} is not smaller. Skipping${Color_Off}";
+                    # Cleanup
+                    rm -rf "/tmp/video/*";
+                    echo -e "${On_Yellow}${Bold}${file} ${Bold_Off}being optimized now with another method! Please be patient.${Color_Off}";
+                    filename=$(basename "${file}");
+                    filename="${filename%.*}";
+                    frames=$(ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 "${file}")
+                    # Start transcoding (2-pass@1500kbps)                   
+                    ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 1 -f mp4 /dev/null && \
+                    ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 2 -movflags faststart -write_tmcd 0 "/tmp/video/${file}"
+                
+                
+                    if [ ${PIPESTATUS[0]} -eq 0 ]; then
+                        oldsize=$(wc -c <"${file}");
+                        newsize=$(wc -c <"/tmp/video/${file}");
+                        if [ $newsize -lt $oldsize ]; then
+                            chown `stat -c "%u:%g" "${file}"` "/tmp/video/${file}";
+                            chmod `stat -c "%a" "${file}"` "/tmp/video/${file}";
+                            mv "${file}" "${file}.backup";
+                            mv "/tmp/video/${file}" "${file}";
+                            echo "${file}" >> /video/.hero-videoptim;
+                            echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
+                        else
+                            echo "${file}" >> /video/.hero-videoptim;
+                            echo -e "${On_Red}Optimized file for ${file} is not smaller. Skipping${Color_Off}";
+                    fi
                 fi
             else
                 echo -e "${On_Light_Red}Optimizing file ${file} failed. Skipping${Color_Off}";
