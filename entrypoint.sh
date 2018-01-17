@@ -38,31 +38,35 @@ On_Yellow='\e[43m'        # Yellow
 On_Light_Red='\e[101m'    # Light Red
 On_Light_Blue='\e[104m'   # Light Blue
 
+# Create tmp folder for transcoding
 mkdir -p "/tmp/video/";
 shopt -s nullglob;
 
 echo -e "${Reverse}Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
 echo -e "${Reverse_Off}${Green}${Bold}\nStarting processing ${1}${Bold_Off}${Color_Off}\n";
 cd /video/$1;
+# Scan recursive for suitable files
 for file in *
 do
     if [ -d "${file}" ] ; then
         /bin/entrypoint.sh "${1}/${file}";
     else
+        # Suitable video files are currently set to the following video file extensions
         if ( [ ${file: -4} == ".avi" ] || [ ${file: -4} == ".mkv" ] || [ ${file: -4} == ".mp4" ] || [ ${file: -4} == ".wmv" ] || [ ${file: -4} == ".ts" ] || [ ${file: -4} == ".mov" ] || [ ${file: -4} == ".flv" ] || [ ${file: -4} == ".webm" ] ); then
             if grep -Fxq "${file}" /video/.hero-videoptim
             then
                 echo -e "${On_Light_Blue}${file} already optimized in previous run. Skipping${Color_Off}";
                 continue
             fi
-
             # Cleanup
             rm -rf "/tmp/video/*";
             echo -e "${On_Yellow}${Bold}${file} ${Bold_Off}being optimized now! Please be patient.${Color_Off}";
             filename=$(basename "${file}");
             filename="${filename%.*}";
-            frames=$(ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 "${file}")
-            # Start transcoding
+            frames=$(ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 "${file}");
+            echo -e "\nCurrent video: ${file}\nDetected file name: ${filename}\nTotal # of frames: ${frames}\n";
+
+            # Start transcoding @CRF22
             ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -preset veryslow -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${file}";
             if [ ${PIPESTATUS[0]} -eq 0 ]; then
                 oldsize=$(wc -c <"${file}");
@@ -75,12 +79,12 @@ do
                     echo "${file}" >> /video/.hero-videoptim;
                     echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                 else
+                    echo -e "${On_Yellow}Optimized file for ${file} is not smaller. Trying alternativ compression method (2pass@1500kbps).${Color_Off}";
                     # Cleanup
                     rm -rf "/tmp/video/*";
                     echo -e "${On_Yellow}${Bold}${file} ${Bold_Off}being optimized now with another method! Please be patient.${Color_Off}";
-                    filename=$(basename "${file}");
-                    filename="${filename%.*}";
-                    frames=$(ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 "${file}")
+                    echo -e "\nCurrent video: ${file}\nDetected file name: ${filename}\nTotal # of frames: ${frames}\n";
+
                     # Start transcoding (2-pass@1500kbps)
                     ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 1 -f mp4 /dev/null && \
                     ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 2 -movflags faststart -write_tmcd 0 "/tmp/video/${file}"
