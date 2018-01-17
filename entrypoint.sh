@@ -79,10 +79,10 @@ do
                     echo "${file}" >> /video/.hero-videoptim;
                     echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                 else
-                    echo -e "${On_Yellow}Optimized file for ${file} is not smaller. Trying alternativ compression method (2pass@1500kbps).${Color_Off}";
+                    echo -e "${On_Yellow}Optimized file for ${file} is not smaller. Trying alternative compression method (2pass@1500kbps).${Color_Off}";
                     # Cleanup
                     rm -rf "/tmp/video/*";
-                    echo -e "${On_Yellow}${Bold}${file} ${Bold_Off}being optimized now with another method! Please be patient.${Color_Off}";
+                    echo -e "${On_Yellow}${Bold}${file} ${Bold_Off}being optimized now with 2pass@1500kbps. Please be patient.${Color_Off}";
                     echo -e "\nCurrent video: ${file}\nDetected file name: ${filename}\nTotal # of frames: ${frames}\n";
 
                     # Start transcoding (2-pass@1500kbps)
