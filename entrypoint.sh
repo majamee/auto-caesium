@@ -88,8 +88,8 @@ do
                     # Start transcoding (2-pass@1500kbps)
                     ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 1 -f mp4 /dev/null && \
                     ffmpeg -v error -stats -y -threads 4 -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 2 -movflags faststart -write_tmcd 0 "/tmp/video/${file}"
-                    # Clean-up 
-                    ls -ll;
+                    # Clean-up 2pass logs
+                    rm ffmpeg2pass-0.log*;
 
                     if [ ${PIPESTATUS[0]} -eq 0 ]; then
                         oldsize=$(wc -c <"${file}");
