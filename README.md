@@ -1,4 +1,6 @@
-[![](https://images.microbadger.com/badges/version/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) [![](https://images.microbadger.com/badges/image/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) [![Docker Automated build](https://img.shields.io/docker/automated/majamee/hero-videoptim.svg)]() [![Docker Build Status](https://img.shields.io/docker/build/majamee/hero-videoptim.svg)]() | [![Docker Stars](https://img.shields.io/docker/stars/majamee/hero-videoptim.svg?style=social)]() [![Docker Pulls](https://img.shields.io/docker/pulls/majamee/hero-videoptim.svg?style=social)]()
+[![](https://images.microbadger.com/badges/version/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) [![](https://images.microbadger.com/badges/image/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) | 
+[![Docker Automated build](https://img.shields.io/docker/automated/majamee/hero-videoptim.svg)]() [![Docker Build Status](https://img.shields.io/docker/build/majamee/hero-videoptim.svg)]() | 
+[![Docker Stars](https://img.shields.io/docker/stars/majamee/hero-videoptim.svg?style=social)]() [![Docker Pulls](https://img.shields.io/docker/pulls/majamee/hero-videoptim.svg?style=social)]()
 
 # hero-videoptim
 Docker container that uses ffmpeg to auto-optimize a full directory of hero-video-files, ignoring non optimizable and failing files.
