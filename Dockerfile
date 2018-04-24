@@ -1,4 +1,4 @@
-FROM        alpine:latest
+FROM        alpine:edge
 
 RUN         apk add --no-cache --update ffmpeg bash && rm -rf /var/cache/apk/*
 COPY        ./entrypoint.sh /bin/entrypoint.sh
