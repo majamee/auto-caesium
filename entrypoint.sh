@@ -100,8 +100,10 @@ do
                             mv "${file}" "${file}.backup";
                             mv "/tmp/video/${file}" "${file}";
                             echo "${file}" >> /video/.hero-videoptim;
-                            cp "/app/player/html5.html" "${filename}.html";
                             cp "/app/player/html5.css" "html5.css";
+                            cp "/app/player/html5.html" "${filename}.html";
+                            sed -i 's/myVideo.mp4/${file}/g' "${filename}.html";
+                            sed -i 's/myVideo/${filename}/g' "${filename}.html";
                             echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                         else
                             echo "${file}" >> /video/.hero-videoptim;
