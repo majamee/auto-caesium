@@ -10,7 +10,7 @@
 }
 
 /* Add some content at the bottom of the video/page */
-.content {
+.overlay {
   position: fixed;
   bottom: 0;
   left: 0;

@@ -32,3 +32,4 @@ ffmpeg -y -threads 0 -i "input.mkv" -an -c:v libx264 -x264opts 'keyint=24:min-ke
 * Optimized hero-video replaces the old file, which itself is being kept renamed as `*.backup`
 * Checks result for negative compression and prohibits it (keeps original if so)
 * HTML5 Hero Video/ Background Player demo included
+* Include Plyr for hero video/ background video playback
