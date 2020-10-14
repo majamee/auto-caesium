@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Include https://github.com/ApoorvSaxena/lozad.js for lazy loading video -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+
+    <title>HTML5 Hero Lazy Loading Background Player Demo</title>
+  </head>
+
+  <body>
+    <!-- Include your html5 player .html here -->
+    <iframe src="../../player/hero/html5.html" type="text/html" frameborder="0" allowfullscreen width="100%" height="1080" title="HTML5 Hero Lazy Loading Background Player Demo" class="lozad"></iframe>
+  </body>
+
+</html>
