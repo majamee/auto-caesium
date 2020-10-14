@@ -1,0 +1,22 @@
+/* Style the video: 100% width and height to cover the entire window */
+#heroVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: auto;
+  z-index: -1;
+  vertical-align: middle;
+}
+
+/* Add some content at the bottom of the video/page */
+.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  min-width: 100%;
+  height: auto;
+  padding: 20px;
+}
