@@ -79,6 +79,8 @@ do
                     echo "${file}" >> /video/.hero-videoptim;
                     cp "/app/player/html5.css" "/video/html5.css";
                     chown `stat -c "%u:%g" "${file}"` "/video/html5.css";
+                    cp "/app/player/index.html.sample" "/video/index.html.sample";
+                    chown `stat -c "%u:%g" "${file}"` "/video/index.html.sample";
                     cp "/app/player/html5.html" "/video/${filename}.html";
                     sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}.html";
                     chown `stat -c "%u:%g" "${file}"` "/video/${filename}.html";
@@ -110,6 +112,8 @@ do
                             echo "${file}" >> /video/.hero-videoptim;
                             cp "/app/player/html5.css" "/video/html5.css";
                             chown `stat -c "%u:%g" "${file}"` "/video/html5.css";
+                            cp "/app/player/index.html.sample" "/video/index.html.sample";
+                            chown `stat -c "%u:%g" "${file}"` "/video/index.html.sample";
                             cp "/app/player/html5.html" "/video/${filename}.html";
                             sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}.html";
                             chown `stat -c "%u:%g" "${file}"` "/video/${filename}.html";
