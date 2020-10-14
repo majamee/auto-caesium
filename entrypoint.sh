@@ -101,11 +101,12 @@ do
                             mv "${file}" "${file}.backup";
                             mv "/tmp/video/${file}" "${file}";
                             echo "${file}" >> /video/.hero-videoptim;
-                            echo -e "\nTEST\n${file}\n${filename}\n";
+                            echo -e "\nTEST0";
+                            echo -e "\nTEST\n${filename}\n";
                             cp "/app/player/html5.css" "/video/html5.css";
                             cp "/app/player/html5.html" "/video/${filename}.html";
                             sed -i 's/myVideo.mp4/${file}/g' "/video/${filename}.html";
-                            echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
+                            echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\nBackup of original file created next to it.\n";
                         else
                             echo "${file}" >> /video/.hero-videoptim;
                             echo -e "${On_Red}Optimized file for ${file} is not smaller. Skipping${Color_Off}";
