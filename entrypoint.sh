@@ -42,7 +42,7 @@ On_Light_Blue='\e[104m'   # Light Blue
 mkdir -p "/tmp/video/";
 shopt -s nullglob;
 
-echo "Version Testing 0.1";
+echo "Version Testing 0.2";
 echo -e "${Reverse}Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
 echo -e "${Reverse_Off}${Green}${Bold}\nStarting processing ${1}${Bold_Off}${Color_Off}\n";
 cd /video/$1;
