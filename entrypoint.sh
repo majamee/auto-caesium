@@ -42,6 +42,7 @@ On_Light_Blue='\e[104m'   # Light Blue
 mkdir -p "/tmp/video/";
 shopt -s nullglob;
 
+echo "Version Testing 0.1";
 echo -e "${Reverse}Please be aware, that the audio track of all videos in provided folder will be cut. Due to that, originals will be kept renamed.";
 echo -e "${Reverse_Off}${Green}${Bold}\nStarting processing ${1}${Bold_Off}${Color_Off}\n";
 cd /video/$1;
@@ -100,7 +101,7 @@ do
                             mv "${file}" "${file}.backup";
                             mv "/tmp/video/${file}" "${file}";
                             echo "${file}" >> /video/.hero-videoptim;
-                            echo "${file}\n${filename}\n"
+                            echo -e "\nTEST\n${file}\n${filename}\n";
                             cp "/app/player/html5.css" "/video/html5.css";
                             cp "/app/player/html5.html" "/video/${filename}.html";
                             sed -i 's/myVideo.mp4/${file}/g' "/video/${filename}.html";
