@@ -1,5 +1,5 @@
-[![](https://images.microbadger.com/badges/version/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) [![](https://images.microbadger.com/badges/image/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) | 
-[![Docker Automated build](https://img.shields.io/docker/automated/majamee/hero-videoptim.svg)]() [![Docker Build Status](https://img.shields.io/docker/build/majamee/hero-videoptim.svg)]() | 
+[![](https://images.microbadger.com/badges/version/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) [![](https://images.microbadger.com/badges/image/majamee/hero-videoptim.svg)](https://microbadger.com/images/majamee/hero-videoptim) |
+[![Docker Automated build](https://img.shields.io/docker/automated/majamee/hero-videoptim.svg)]() [![Docker Build Status](https://img.shields.io/docker/build/majamee/hero-videoptim.svg)]() |
 [![Docker Stars](https://img.shields.io/docker/stars/majamee/hero-videoptim.svg?style=social)]() [![Docker Pulls](https://img.shields.io/docker/pulls/majamee/hero-videoptim.svg?style=social)]()
 
 # hero-videoptim
@@ -31,3 +31,5 @@ ffmpeg -y -threads 0 -i "input.mkv" -an -c:v libx264 -x264opts 'keyint=24:min-ke
 * Removes audio track to save bandwidth and to make autoplay for hero videos in all modern web browsers possible
 * Optimized hero-video replaces the old file, which itself is being kept renamed as `*.backup`
 * Checks result for negative compression and prohibits it (keeps original if so)
+* HTML5 Hero Video/ Background Player demo included
+* Include Plyr for hero video/ background video playback

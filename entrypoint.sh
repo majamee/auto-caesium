@@ -77,6 +77,14 @@ do
                     mv "${file}" "${file}.backup";
                     mv "/tmp/video/${file}" "${file}";
                     echo "${file}" >> /video/.hero-videoptim;
+                    cp "/app/player/html5.css" "/video/html5.css";
+                    chown `stat -c "%u:%g" "${file}"` "/video/html5.css";
+                    cp "/app/player/html5.html" "/video/${filename}.html";
+                    sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}.html";
+                    chown `stat -c "%u:%g" "${file}"` "/video/${filename}.html";
+                    cp "/app/player/plyr.html" "/video/${filename}-plyr.html";
+                    sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}-plyr.html";
+                    chown `stat -c "%u:%g" "${file}"` "/video/${filename}-plyr.html";
                     echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                 else
                     echo -e "${On_Yellow}Optimized file for ${file} is not smaller. Trying alternative compression method (2pass@1500kbps).${Color_Off}";
@@ -100,6 +108,14 @@ do
                             mv "${file}" "${file}.backup";
                             mv "/tmp/video/${file}" "${file}";
                             echo "${file}" >> /video/.hero-videoptim;
+                            cp "/app/player/html5.css" "/video/html5.css";
+                            chown `stat -c "%u:%g" "${file}"` "/video/html5.css";
+                            cp "/app/player/html5.html" "/video/${filename}.html";
+                            sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}.html";
+                            chown `stat -c "%u:%g" "${file}"` "/video/${filename}.html";
+                            cp "/app/player/plyr.html" "/video/${filename}-plyr.html";
+                            sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}-plyr.html";
+                            chown `stat -c "%u:%g" "${file}"` "/video/${filename}-plyr.html";
                             echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                         else
                             echo "${file}" >> /video/.hero-videoptim;

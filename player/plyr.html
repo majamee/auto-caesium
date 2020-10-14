@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Using latest stable Plyr version 3.x styling -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3/dist/plyr.css">
+
+  <!-- Adding overlay styling -->
+  <link rel="stylesheet" href="html5.css">
+
+  <!-- Include plyr.js and dash.js in your page -->
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3/dist/plyr.min.js"></script>
+  <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+  <!-- Rangetouch to fix <input type="range"> on touch devices (see https://rangetouch.com) -->
+  <script src="https://cdn.jsdelivr.net/npm/rangetouch/dist/rangetouch.js" async></script>
+  <!-- Polyfills -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6,Array.prototype.includes,CustomEvent"></script>
+
+  <title>Auto-DASH-HLS Plyr Player</title>
+</head>
+
+<body>
+  <main role="main" id="main">
+    <!-- The video -->
+    <video id="player" poster="thumbnails/poster.png">
+      <source src="myVideo.mp4" type="video/mp4">
+    </video>
+    <!-- Optional: some overlay text to describe the video -->
+    <div class="overlay">
+      <h1>Heading</h1>
+      <p>Lorem ipsum...</p>
+    </div>
+  </main>
+
+  <script>
+    /* Initialize Plyr Player */
+    const player = new Plyr('#player', {
+      /* Options */
+      muted: true,
+      autoplay: true,
+      clickToPlay: false,
+      disableContextMenu: true,
+      fullscreen: { enabled: false },
+      loop: { active: true },
+      controls: []
+    });
+  </script>
+
+</body>
+
+</html>
