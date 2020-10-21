@@ -67,25 +67,26 @@ do
             echo -e "\nCurrent video: ${file}\nDetected file name: ${filename}\nTotal # of frames: ${frames}\n";
 
             # Start transcoding @CRF22
-            ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -preset veryslow -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${file}";
+            ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -preset veryslow -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${filename}.mp4";
+
             if [ ${PIPESTATUS[0]} -eq 0 ]; then
                 oldsize=$(wc -c <"${file}");
-                newsize=$(wc -c <"/tmp/video/${file}");
+                newsize=$(wc -c <"/tmp/video/${filename}.mp4");
                 if [ $newsize -lt $oldsize ]; then
-                    chown `stat -c "%u:%g" "${file}"` "/tmp/video/${file}";
-                    chmod `stat -c "%a" "${file}"` "/tmp/video/${file}";
+                    chown `stat -c "%u:%g" "${file}"` "/tmp/video/${filename}.mp4";
+                    chmod `stat -c "%a" "${file}"` "/tmp/video/${filename}.mp4";
                     mv "${file}" "${file}.backup";
-                    mv "/tmp/video/${file}" "${file}";
+                    mv "/tmp/video/${filename}.mp4" "${filename}.mp4";
                     echo "${file}" >> /video/.hero-videoptim;
                     cp "/app/player/html5.css" "/video/html5.css";
                     chown `stat -c "%u:%g" "${file}"` "/video/html5.css";
                     cp "/app/player/index.html.sample" "/video/index.html.sample";
                     chown `stat -c "%u:%g" "${file}"` "/video/index.html.sample";
                     cp "/app/player/html5.html" "/video/${filename}.html";
-                    sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}.html";
+                    sed -i "s/myVideo.mp4/${filename}.mp4/g" "/video/${filename}.html";
                     chown `stat -c "%u:%g" "${file}"` "/video/${filename}.html";
                     cp "/app/player/plyr.html" "/video/${filename}-plyr.html";
-                    sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}-plyr.html";
+                    sed -i "s/myVideo.mp4/${filename}.mp4/g" "/video/${filename}-plyr.html";
                     chown `stat -c "%u:%g" "${file}"` "/video/${filename}-plyr.html";
                     echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                 else
@@ -97,28 +98,29 @@ do
 
                     # Start transcoding (2-pass@1500kbps)
                     ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 1 -f mp4 /dev/null && \
-                    ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 2 -movflags faststart -write_tmcd 0 "/tmp/video/${file}"
+                    ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 2 -movflags faststart -write_tmcd 0 "/tmp/video/${filename}.mp4"
+
                     # Clean-up 2pass logs
                     rm ffmpeg2pass-0.log*;
 
                     if [ ${PIPESTATUS[0]} -eq 0 ]; then
                         oldsize=$(wc -c <"${file}");
-                        newsize=$(wc -c <"/tmp/video/${file}");
+                        newsize=$(wc -c <"/tmp/video/${filename}.mp4");
                         if [ $newsize -lt $oldsize ]; then
-                            chown `stat -c "%u:%g" "${file}"` "/tmp/video/${file}";
-                            chmod `stat -c "%a" "${file}"` "/tmp/video/${file}";
+                            chown `stat -c "%u:%g" "${file}"` "/tmp/video/${filename}.mp4";
+                            chmod `stat -c "%a" "${file}"` "/tmp/video/${filename}.mp4";
                             mv "${file}" "${file}.backup";
-                            mv "/tmp/video/${file}" "${file}";
+                            mv "/tmp/video/${filename}.mp4" "${filename}.mp4";
                             echo "${file}" >> /video/.hero-videoptim;
                             cp "/app/player/html5.css" "/video/html5.css";
                             chown `stat -c "%u:%g" "${file}"` "/video/html5.css";
                             cp "/app/player/index.html.sample" "/video/index.html.sample";
                             chown `stat -c "%u:%g" "${file}"` "/video/index.html.sample";
                             cp "/app/player/html5.html" "/video/${filename}.html";
-                            sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}.html";
+                            sed -i "s/myVideo.mp4/${filename}.mp4/g" "/video/${filename}.html";
                             chown `stat -c "%u:%g" "${file}"` "/video/${filename}.html";
                             cp "/app/player/plyr.html" "/video/${filename}-plyr.html";
-                            sed -i "s/myVideo.mp4/${file}/g" "/video/${filename}-plyr.html";
+                            sed -i "s/myVideo.mp4/${filename}.mp4/g" "/video/${filename}-plyr.html";
                             chown `stat -c "%u:%g" "${file}"` "/video/${filename}-plyr.html";
                             echo -e "${On_Green}Optimized file ${Bold}${file} ${Bold_Off}successfully as hero-video${Color_Off}\n";
                         else
