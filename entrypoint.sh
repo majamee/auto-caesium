@@ -67,7 +67,7 @@ do
             echo -e "\nCurrent video: ${file}\nDetected file name: ${filename}\nTotal # of frames: ${frames}\n";
 
             # Start transcoding @CRF22
-            ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -preset veryslow -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${file}";
+            ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(2160,iw)':-4" -preset veryslow -crf 22 -movflags faststart -write_tmcd 0 "/tmp/video/${file}";
             if [ ${PIPESTATUS[0]} -eq 0 ]; then
                 oldsize=$(wc -c <"${file}");
                 newsize=$(wc -c <"/tmp/video/${file}");
@@ -96,8 +96,8 @@ do
                     echo -e "\nCurrent video: ${file}\nDetected file name: ${filename}\nTotal # of frames: ${frames}\n";
 
                     # Start transcoding (2-pass@1500kbps)
-                    ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 1 -f mp4 /dev/null && \
-                    ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(1920,iw)':-4" -b:v 1500k -pass 2 -movflags faststart -write_tmcd 0 "/tmp/video/${file}"
+                    ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(2160,iw)':-4" -b:v 1500k -pass 1 -f mp4 /dev/null && \
+                    ffmpeg -y -threads 0 -v error -stats -i "${file}" -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -profile:v high -level 4.0 -vf "scale=min'(2160,iw)':-4" -b:v 1500k -pass 2 -movflags faststart -write_tmcd 0 "/tmp/video/${file}"
                     # Clean-up 2pass logs
                     rm ffmpeg2pass-0.log*;
 
