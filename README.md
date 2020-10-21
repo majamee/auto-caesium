@@ -27,7 +27,7 @@ ffmpeg -y -threads 0 -i "input.mkv" -an -c:v libx264 -x264opts 'keyint=24:min-ke
 
 ## Features
 * Optimizes all video files in a folder or in any of its subfolders for web playback
-* Prevents upscaling (maximum 2160p)
+* Prevents upscaling (maximum 1080p)
 * Removes audio track to save bandwidth and to make autoplay for hero videos in all modern web browsers possible
 * Optimized hero-video replaces the old file, which itself is being kept renamed as `*.backup`
 * Checks result for negative compression and prohibits it (keeps original if so)
